@@ -1,0 +1,39 @@
+<project name="Anagram" default="makejar" basedir=".">
+   <description>
+      compiles the Anagram solver
+   </description>
+
+   <property name="src" location="src/"/>
+   <property name="bin" location="bin/"/>
+   <property name="res" location="res/"/>
+
+   <target name="bin">
+      <mkdir dir="${bin}"/>
+   </target>
+
+   <target name="compile" depends="bin">
+      <javac
+         source="1.5"
+         target="1.5"
+         srcdir="${src}" 
+         destdir="${bin}"
+         includeantruntime="false"
+         listfiles="true" />
+   </target>
+
+   <target name="makejar" depends="compile">
+      <jar destfile="Anagram.jar">
+         <fileset dir="${bin}">
+            <include name="**/*.class"/>
+         </fileset>
+         <fileset dir="${res}" />
+         <manifest>
+            <attribute name="Main-Class" value="Anagram"/>
+         </manifest>
+      </jar>
+   </target>
+
+   <target name="clean">
+      <delete dir="${bin}" verbose="true" failonerror="false"/>
+   </target>
+</project>
